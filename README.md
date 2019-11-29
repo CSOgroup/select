@@ -1,11 +1,11 @@
 # README #
 
-This is the official public repository of the SELECT package for the analysis of evolutionary dependencies between functional alterations in cancer.
+This is the official repository of the R package SELECT - Selected Events Linked by Evolutionary Conditions across human Tumors - a methodology to infer evolutionary inter-dependencies between functional alterations in cancer.
 
 ### What is this repository for? ###
 
 * SELECT is a package for inferring evolutionary dependencies between functional alterations in cancer starting from patterns of alteration occurrences in large tumor sample cohorts.
-* Version: 1
+* Last Version: 1.6
 
 ### How To ###
 
@@ -18,7 +18,8 @@ This is the official public repository of the SELECT package for the analysis of
 
 ### Contribution guidelines ###
 
-SELECT was originally developed by Marco Mina. SELECT is currently maintained by the Computational Systems Oncology lab (CSO) at the University of Lausanne (Unil), Switzerland.
+SELECT was originally developed by Marco Mina at the University of Lausanne, Switzerland.
+SELECT is currently maintained by the Computational Systems Oncology lab (CSO) at the University of Lausanne (Unil), Switzerland.
 
 ### Who do I talk to? ###
 
