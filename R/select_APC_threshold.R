@@ -2,8 +2,8 @@
 TP.FP.stat <- function(A,th) {
 	A = A[which(A$APC > 1e-8),,drop=FALSE]
 	t =th
-	TN = ecdf(A[!A$FDR,,drop=FALSE]$APC)(t)
-	FN = ecdf(A[A$FDR,,drop=FALSE]$APC)(t)
+	TN = ecdf(A[!A$wMI_p.value_FDR,,drop=FALSE]$APC)(t)
+	FN = ecdf(A[A$wMI_p.value_FDR,,drop=FALSE]$APC)(t)
 	TP = 1 - FN
 	FP = 1 - TN
 	F1 = 2 * TP / (2 * TP + FN + FP)
@@ -15,14 +15,14 @@ TP.FP.stat <- function(A,th) {
 TP.FP.stats <- function(A,res=1000) {
 	A = A[which(A$APC > 1e-8),,drop=FALSE] # Do not check APC values proximal to 0 
 	if(nrow(A)<1) return(NULL)
-	if(nrow(A[A$FDR,])<1) return(NULL)
-	if(nrow(A[!A$FDR,])<1) return(NULL)
+	if(nrow(A[A$wMI_p.value_FDR,])<1) return(NULL)
+	if(nrow(A[!A$wMI_p.value_FDR,])<1) return(NULL)
 	t1 = min(A$APC) + ((0 : res) * ((max(A$APC)-min(A$APC)) / res))
-	t2 = unique(A[A$FDR,,drop=FALSE]$APC)
+	t2 = unique(A[A$wMI_p.value_FDR,,drop=FALSE]$APC)
 	t = sort(unique(c(t1,t2)))
 	AA = data.frame('t' = t)
-	AA$TN = ecdf(A[!A$FDR,,drop=FALSE]$APC)(AA$t)
-	AA$FN = ecdf(A[A$FDR,,drop=FALSE]$APC)(AA$t)
+	AA$TN = ecdf(A[!A$wMI_p.value_FDR,,drop=FALSE]$APC)(AA$t)
+	AA$FN = ecdf(A[A$wMI_p.value_FDR,,drop=FALSE]$APC)(AA$t)
 	AA$TP = 1 - AA$FN
 	AA$FP = 1 - AA$TN
 	AA$F1 = 2 * AA$TP / (2 * AA$TP + AA$FN + AA$FP)

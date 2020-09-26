@@ -5,16 +5,17 @@ This is the official repository of the R package SELECT - Selected Events Linked
 ### What is this repository for? ###
 
 * SELECT is a package for inferring evolutionary dependencies between functional alterations in cancer starting from patterns of alteration occurrences in large tumor sample cohorts.
-* Last Version: 1.6
+* Last Version: 1.6.1
 
 ### How To ###
 
 * Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
+
+Install the package with R CMD INSTALL [select tarball file name]
+
 * How to run tests
-* Deployment instructions
+
+Run the example test test_random_v1.R in folder test.
 
 ### Contribution guidelines ###
 

@@ -99,16 +99,16 @@ estimate_random_Pval <- function(r_MI, invert.scores = TRUE) {
 # 	return(MI_p.value)
 # }
 
-#' Determine optimal P value thresholds to have a 0.1 FDR
+#' Determine optimal P value thresholds to have a FDR.thresh (default: 0.1) FDR
 #' 
 #' @param temp list of m matrices (n x n)
 #' @return n lists of n vectors of m elements
 #' 
-FDR_threshold <- function(FDR) {
+FDR_threshold <- function(FDR, FDR.thresh=0.1) {
 	thresh = do.call(rbind,lapply(FDR, function(a) {
 			# thresh = lapply(x$FDR, function(a) {
 			a1 = a
-			a = a[which(a$t <= 0.1),,drop=FALSE]
+			a = a[which(a$t <= FDR.thresh),,drop=FALSE]
 			if(nrow(a)==0) {
 				temp = a1[1,]
 				temp['t'] = NA
@@ -118,11 +118,11 @@ FDR_threshold <- function(FDR) {
 				return(temp)
 			}
 			# if(nrow(a)==0) return(c())
-			b = which(a$FDR <= 0.1)
+			b = which(a$FDR <= FDR.thresh)
 			if(length(b)>0) {
 				best_single_pos = max(b)
 			} else {
-				b = which(a$FDR > 0.1)
+				b = which(a$FDR > FDR.thresh)
 				best_single_pos = b[1]
 			}
 				return(a[best_single_pos,])
@@ -144,15 +144,16 @@ FDR_threshold <- function(FDR) {
 #' @param column='wMI_p.value'
 #' @return FDR estimates, optimal thresholds, annotated alpi table
 #' 
-FDR_analysis <- function(alpi, r.MI, column='wMI_p.value') {
+FDR_analysis <- function(alpi, r.MI, column='wMI_p.value', FDR.thresh=0.1) {
 	r.MI_table = do.call(cbind,lapply(r.MI, function(x) x[cbind(alpi$SFE_1,alpi$SFE_2),drop=FALSE]))
 	# print(dim(r.MI_table))
 	rownames(r.MI_table) = rownames(alpi)
 	r.MI_p.value = estimate_random_Pval(r.MI_table)
-	void_global = estimate_FDR_by_type(alpi, alpi[,column], r.MI_p.value)
+	void_global = estimate_FDR_by_type(alpi, alpi[,column], r.MI_p.value, FDR.thresh=FDR.thresh)
 	FDR = void_global$FDR
-	FDR_threshold = FDR_threshold(FDR)
-	alpi$FDR = FALSE
-	alpi[which(alpi[,column] <= FDR_threshold[alpi$int_type, 't']), 'FDR'] = TRUE
+	FDR_threshold = FDR_threshold(FDR, FDR.thresh=FDR.thresh)
+	fdr_colname = paste(column, 'FDR', sep="_")
+	alpi[, fdr_colname] = FALSE
+	alpi[which(alpi[,column] <= FDR_threshold[alpi$int_type, 't']), fdr_colname] = TRUE
 	return(list('FDR'=FDR, 'FDR_threshold'=FDR_threshold, 'alpi'=alpi))
 }
