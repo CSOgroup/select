@@ -12,13 +12,13 @@ This is the official repository of the R package SELECT - Selected Events Linked
 * Summary of set up
 
 ``` r
-# install.packages("devtools")
+install.packages("devtools")
 devtools::install_github("CSOgroup/select")
 ```
 
 * How to run tests
 
-Run the example test test_random_v1.R in folder test.
+- Run the example test test_random_v1.R in folder test.
 
 ### Contribution guidelines ###
 
