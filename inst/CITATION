@@ -1,0 +1,32 @@
+citHeader("To cite select in publications use:")
+
+citEntry(
+  entry    = "Article",
+  title    = "Discovering functional evolutionary dependencies in human cancers",
+  author   = "Mina, Marco and Iyer, Arvind and Tavernari, Daniele and Raynaud, Franck and Ciriello, Giovanni",
+  journal  = "Nature Genetics",
+  year     = 2020,
+  volume   = 52,
+  number   = 11,
+  pages    = 1198-1207,
+  url      = "http://dx.doi.org/10.1016/j.ccell.2017.06.010",
+  textVersion = paste(
+
+  )
+)
+
+
+citEntry(
+  entry    = "Article",
+  title    = "Conditional selection of genomic alterations dictates cancer evolution and oncogenic dependencies",
+  author   = "Mina, Marco and Raynaud, Franck and Tavernari, Daniele and Battistello, Elena and Sungalee, Stephanie and Saghafinia, Sadegh and Laessle, Titouan and Sanchez-Vega, Francisco and Schultz, Nikolaus and Oricchio, Elisa and others",
+  journal  = "Cancer cell",
+  year     = 2017,
+  volume   = 32,
+  number   = 2,
+  pages    = 155-168,
+  url      = "http://dx.doi.org/10.1016/j.ccell.2017.06.010",
+  textVersion = paste(
+
+  )
+)

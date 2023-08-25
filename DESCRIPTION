@@ -1,15 +1,24 @@
 Package: select
-Version: 1.6.1
+Version: 1.6.2
 Date: 2019-12-01
 Title: SELECT - Selected Events Linked by Evolutionary Conditions across human Tumors
-Author: Marco Mina <marco.mina.85@gmail.com>
-Maintainer: Marco Mina <marco.mina.85@gmail.com>
+Authors@R: 
+    person("Marco", "Mina", , "marco.mina.85@gmail.com", role = c("aut", "cre"))
+    person("Arvind", "Iyer", , "ayalurarvind@gamil.com", role = c("cre"),comment = c(ORCID = "0000-0002-8247-700X"))
+    person("Giovanni", "Ciriello", , "givoanni.cirello@unil.ch", role = c("aut","cre"),comment = c(ORCID ="0000-0003-2021-8683"))
+Maintainer: Arvind Iyer <ayalurarvind@gamil.com>
 Description: This R package implements the SELECT methodology to infer functional inter-dependencies between functional alterations in cancer.
 Depends: R (>= 3.0.0)
-License: LGPL-3
+License: LGPL (>= 3)
 Encoding: UTF-8
 LazyData: true
-Imports: foreach, doParallel, BiRewire, igraph, parallel, Matrix, matrixStats
-#Depends: foreach, doParallel, BiRewire, igraph, parallel
-RoxygenNote: 7.0.2
-URL: https://bitbucket.org/cso_repo/
+Imports: 
+ foreach,
+ doParallel,
+ BiRewire,
+ igraph,
+ parallel,
+ Matrix,
+ matrixStats
+RoxygenNote: 7.1.2
+URL: https://github.com/CSOgroup/select
