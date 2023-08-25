@@ -17,8 +17,7 @@ devtools::install_github("CSOgroup/select")
 ```
 
 * How to run tests
-
-- Run the example test test_random_v1.R in folder test.
+	- Run the example test test_random_v1.R in folder test.
 
 ### Contribution guidelines ###
 
