@@ -18,7 +18,7 @@ devtools::install_github("CSOgroup/select")
 ```
 
 * How to use
-	- Check the introduction fom vignettes folder.
+	- Check the introduction fom vignettes folder or the website.
 
 ### Citation ###
 
@@ -38,4 +38,5 @@ If you use this tool, please cite the papers
 * For any other question related to SELECT, please contact Giovanni Ciriello (giovanni.ciriello@unil.ch).
 
 
+[issue-tracker]: https://github.com/CSOgroup/select/issues
 [issue-tracker]: https://github.com/CSOgroup/select/issues
