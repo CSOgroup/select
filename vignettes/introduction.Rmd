@@ -1,0 +1,146 @@
+---
+title: "Introduction on how to use Select package to find Evolutionary Dependencies."
+author: "Arvind Iyer"
+email: "arvind.iyer@unil.ch"
+date: "`r Sys.Date()`"
+output: 
+ rmarkdown::html_vignette:
+    css: doc.css
+vignette: >
+  %\VignetteIndexEntry{introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+- The goal of select pacakge is to detect Evolutionary Dependecies between alterations/genes in cancer.
+- `select` package provides function to generate the backgorund model and other utilites functions.
+
+### Installation
+
+- You can install the development version of select from [GitHub](https://github.com/CSOgroup/select) with:
+``` r
+# install.packages("devtools")
+# devtools::install_github("CSOgroup/select")
+```
+
+### Example
+
+- We will run select algorithm on processed LUAD dataset from TCGA provided with the package.
+
+
+```{r}
+library(select)
+library(dplyr)
+```
+
+#### Data Description & Format
+
+- The loaded data is list object which consists of 
+  - gam: a presence absence matrix of alterations
+  - samples: a named vector of sample annotations
+  - alt: a named vector of alteration annotations
+
+```{r}
+# Check the data strucutre
+## Load the data provided with the package
+data(luad_data, package = "select")
+str(luad_data)
+```
+
+#### Running select
+
+- We use the function `select()` which generates the background model and results.
+- The parameters for the functions are:
+  - `M`: the list object of GAMs & TMB
+  - `sample.class`: a named vector of samples with covariates
+  - `alteration.class`: a named vector of alteration with covariates
+  - many more
+
+- The function returns a dataframe.
+
+```{r}
+alpi <- select::select(
+  M = luad_data$gam,
+  sample.class = luad_data$samples,
+  alteration.class = luad_data$alt,
+  folder = './',
+  r.seed = 110,
+  n.cores = 1,
+  vetos = NULL,
+  n.permut = 100,
+  min.feature.support=5,
+  min.feature.freq=0.001,
+  remove.0.samples=TRUE,
+  remove.unknown.class.samples=TRUE,
+  rho = 0.1,
+  lambda = 15,
+  save.intermediate.files = FALSE,
+  randomization.switch.threshold = 30,
+  max.memory.size=100,
+  calculate_APC_threshold = TRUE,
+  calculate_FDR = TRUE,
+  verbose = TRUE
+  )
+```
+
+#### Intrepreting the results
+- Lets look into the results
+- The below table explains what each coloum means.
+
+| Colnames                                       | Meaning                                  |
+|------------------------------------------------|------------------------------------------|
+| SFE_1                                          | Selected Functional Event (SFE_1)        |
+| SFE_2                                          | Selected Functional Event  (SFE_2)       |
+| name                                           | Interaction Motif                        |
+| type_1                                         | Type of mutation of SFE_1                |
+| type_2                                         | Type of mutation of SFE_2                |
+| int_type                                       | Interaction Motif  type                  |
+| support_1                                      | Samples mutated with  SFE_1              |
+| support_2                                      | Samples mutated with  SFE_2              |
+| freq_1                                         | Frequency of SFE_1                       |
+| freq_2                                         | Frequency of SFE_2                       |
+| overlap                                        | Co-mutation between   SFE_1 and SFE_2    |
+| max_overlap                                    | Maximum possible   Co-mutation           |
+| freq_overlap                                   | Frequency of   Co-mutation               |
+| r_overlap                                      | Background   Co-mutation                 |
+| r_freq_overlap                                 | Background frequency   of Co-mutation    |
+| diff_overlap                                   | Difference of   co-mutations             |
+| abs_diff_overlap                               | Absoulte Difference   of co-mutations    |
+| direction                                      | Interaction Type                         |
+| wMI_stat                                       | Weighted Mutual   Information            |
+| wMI_p.value                                    | P-value on Mutual   Information          |
+| ME_p.value                                     | P-value on   co-mutation                 |
+| E.r.wMI_stat                                   | Background Weighted   Mutual Information |
+| MI_diff                                        | Difference of Mutual   Information       |
+| wMI_p.value_FDR                                | FDR                                      |
+| select_score_good_cancer_cell_2017_criterion_1 | Cancer Cell Paper Criteria               |
+| select_score                                   | Effect Size (select Score)               |
+
+
+```{r}
+options(width=100)
+# Look into dataframe
+(alpi %>% filter(wMI_p.value_FDR) %>% arrange(desc(select_score))) %>% head(2) 
+# Total significant Hits
+alpi  %>% filter(wMI_p.value_FDR) %>% count(wMI_p.value_FDR,direction)
+```
+
+
+## Suggestion
+
+- Please go through the methods on best way to filter and use the method as mentioned in the paper.
+  - Mina, M., Iyer, A., Tavernari, D., Raynaud, F., & Ciriello, G. (2020). Discovering functional evolutionary dependencies in human cancers. Nature Genetics, 52(11), 1198-1207. 
+
+
+### SessionInfo
+```{r}
+# Print the sessionInfo
+sessionInfo()
+```

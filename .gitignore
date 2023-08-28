@@ -1,4 +1,3 @@
-docs
 .Rproj.user
 .Rhistory
 .RData
@@ -21,4 +20,4 @@ inst/doc
 
 man/.Rapp.history
 .DS_Store
-
+.*DS_Store

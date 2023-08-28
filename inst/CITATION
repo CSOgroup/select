@@ -14,19 +14,3 @@ citEntry(
 
   )
 )
-
-
-citEntry(
-  entry    = "Article",
-  title    = "Conditional selection of genomic alterations dictates cancer evolution and oncogenic dependencies",
-  author   = "Mina, Marco and Raynaud, Franck and Tavernari, Daniele and Battistello, Elena and Sungalee, Stephanie and Saghafinia, Sadegh and Laessle, Titouan and Sanchez-Vega, Francisco and Schultz, Nikolaus and Oricchio, Elisa and others",
-  journal  = "Cancer cell",
-  year     = 2017,
-  volume   = 32,
-  number   = 2,
-  pages    = 155-168,
-  url      = "http://dx.doi.org/10.1016/j.ccell.2017.06.010",
-  textVersion = paste(
-
-  )
-)

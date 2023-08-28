@@ -5,7 +5,8 @@ This is the official repository of the R package SELECT - Selected Events Linked
 ### What is this repository for? ###
 
 * SELECT is a package for inferring evolutionary dependencies between functional alterations in cancer starting from patterns of alteration occurrences in large tumor sample cohorts.
-* Last Version: 1.6.2
+* Last Version: 1.6.3
+
 
 ### How To ###
 
@@ -16,8 +17,15 @@ install.packages("devtools")
 devtools::install_github("CSOgroup/select")
 ```
 
-* How to run tests
-	- Run the example test test_random_v1.R in folder test.
+* How to use
+	- Check the introduction fom vignettes folder.
+
+### Citation ###
+
+If you use this tool, please cite the papers
+
+- Mina, M., Iyer, A., Tavernari, D., Raynaud, F., & Ciriello, G. (2020). Discovering functional evolutionary dependencies in human cancers. Nature Genetics, 52(11), 1198-1207.
+- Mina, M., Raynaud, F., Tavernari, D., Battistello, E., Sungalee, S., Saghafinia, S., ... & Ciriello, G. (2017). Conditional selection of genomic alterations dictates cancer evolution and oncogenic dependencies. Cancer cell, 32(2), 155-168.
 
 ### Contribution guidelines ###
 
