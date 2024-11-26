@@ -42,7 +42,7 @@
 	calculate_FDR = TRUE,
 	verbose = TRUE,
 	nbatches = 1,
-	FDR.thresh = 0.1
+	FDR.thresh = FDR.cutoff
 	) {
 	print(paste('-> Collecting event stats on observed GAM...'))
 	# Get AL stats
@@ -166,20 +166,25 @@
 			print(paste('Memory usage:', gc()['Vcells',2], 'MB'))
 		}
 	}
-
+	if(save.intermediate.files) save(FDR, file=paste(folder,'wMI_FDR.RData',sep=''))
+	
 	alpi$select_score_good_cancer_cell_2017_criterion_1 = NA
 	# Select optimal APC score threshold (removing 95% of FP)
 	if(calculate_APC_threshold) {
 		print(paste('-> Calculating APC threshold...'))
 		TP.FP.thr = select:::establish_APC_threshold(alpi)
 		threshold = TP.FP.thr$thresh['t']
+		#print(threshold)
 		alpi$select_score_good_cancer_cell_2017_criterion_1 = FALSE
 		alpi$select_score_good_cancer_cell_2017_criterion_1[which(alpi$APC >= threshold)] = TRUE
+		#print(dim(alpi))
+		#print(colnames(alpi))
 	}
 
+	#print(head(alpi,3))
 	alpi$select_score = alpi$APC
-	alpi$APC = NULL
-
+	#alpi$APC = NULL
+	
 	# Save pairwise results
 	if(save.intermediate.files) save(alpi, file=paste(folder,'alpi.RData',sep=''))
 	out.format = c('name','SFE_1','SFE_2','int_type', 'support_1', 'support_2', 'overlap', 'r_overlap', 'max_overlap', 'direction', 'freq_overlap', 'wMI_p.value', 'ME_p.value', 'wMI_p.value_FDR', 'select_score', 'select_score_good_cancer_cell_2017_criterion_1')
@@ -238,6 +243,7 @@ select <- function(
 	save.intermediate.files = TRUE,
 	randomization.switch.threshold = 30,
 	max.memory.size=100,
+	FDR.cutoff=0.1,
 	calculate_APC_threshold = TRUE,
 	calculate_FDR = TRUE,
 	verbose = TRUE
@@ -296,6 +302,7 @@ select <- function(
 		save.intermediate.files = save.intermediate.files,
 		calculate_APC_threshold = calculate_APC_threshold,
 		calculate_FDR = calculate_FDR,
+		FDR.thresh=FDR.cutoff,
 		verbose = verbose,
 		nbatches = nbatches
 	)

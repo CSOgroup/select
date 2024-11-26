@@ -27,11 +27,14 @@ TP.FP.stats <- function(A,res=1000) {
 	AA$FP = 1 - AA$TN
 	AA$F1 = 2 * AA$TP / (2 * AA$TP + AA$FN + AA$FP)
 	AA$MCC = ((AA$TP * AA$TN) - (AA$FP * AA$FN)) / sqrt((AA$TP + AA$FP)*(AA$TP + AA$FN)*(AA$TN + AA$FP)*(AA$TN + AA$FN))
-	return(as.vector(AA))
+	return(AA)
 }
 
 #' Establish which threshold is the best, using the 95\% of FP exclusion criterion
 get_thresh.2 <- function(x, A) {
+	#print('here')
+	#print(dim(x))
+	#print(x[,'FP'])
 	TP.FP.thresh_v1 = x[x[,'FP'] <= 0.05,,drop=FALSE]
 	TP.FP.thresh_v2 = x[x[,'FP'] >= 0.05,,drop=FALSE]
 	if(is.null(x)) return(NA) # there are no solutions at all. return NA
@@ -39,14 +42,14 @@ get_thresh.2 <- function(x, A) {
 	if(nrow(x)==0) return(NA) # there are no solutions at all. return NA
 	if(nrow(TP.FP.thresh_v1)==0) return(x[nrow(x),]) # there are no good solutions. Set highest th possible 
 	if(nrow(TP.FP.thresh_v2)==0) return(TP.FP.thresh_v1[1,]) # All solutions are good. Set threshold to minimum score of good solutions
-	# print('here')
-	# print(TP.FP.thresh_v1[1,'t'])
+	#print('here')
+	#print(TP.FP.thresh_v1[1,'t'])
 	# print(TP.FP.thresh_v2[nrow(TP.FP.thresh_v2),'t'])
 	th = (TP.FP.thresh_v1[1,'t'] + TP.FP.thresh_v2[nrow(TP.FP.thresh_v2),'t']) / 2
 	th = (TP.FP.thresh_v1[1,'t']) # + TP.FP.thresh_v2[nrow(TP.FP.thresh_v2),'t']) / 2
 	th = TP.FP.thresh_v2[nrow(TP.FP.thresh_v2),'t'] # Set threshold at maximum score associated to FP > 0.05
-	# print(th)
-	# print(TP.FP.stat(A, th))
+	#print(th)
+	#print(TP.FP.stat(A, th))
 	return(TP.FP.stat(A, th))
 	# return(TP.FP.thresh_v1[1,])
 }
@@ -63,7 +66,10 @@ establish_APC_threshold <- function(alpi) {
 		thresh = rep(NA, 7)
 	} else {
 		stats = TP.FP.stats(alpi, 10000)
+		#print(str(stats))
+		#print(head(alpi,2))
 		thresh = get_thresh.2(stats, alpi)
+		#print(str(thresh))
 	}
 	return(list('stats' = stats, thresh = thresh))
 

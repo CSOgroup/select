@@ -1,3 +1,7 @@
+# select 1.6.4
+
+* Fixed some bugs and updated code.
+
 # select 1.6.3
 
 * Added a `NEWS.md` file to track changes to the package.

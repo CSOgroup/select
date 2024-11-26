@@ -86,6 +86,7 @@ alpi <- select::select(
   max.memory.size=100,
   calculate_APC_threshold = TRUE,
   calculate_FDR = TRUE,
+  FDR.cutoff=0.1,
   verbose = TRUE
   )
 ```
@@ -133,11 +134,12 @@ alpi  %>% filter(wMI_p.value_FDR) %>% count(wMI_p.value_FDR,direction)
 ```
 
 
-## Suggestion
+## Suggestion (Important)
 
-- Please go through the methods on best way to filter and use the method as mentioned in the paper.
-  - Mina, M., Iyer, A., Tavernari, D., Raynaud, F., & Ciriello, G. (2020). Discovering functional evolutionary dependencies in human cancers. Nature Genetics, 52(11), 1198-1207. 
+- Please go through the **methods** on best way to filter and use the method as mentioned in the paper.
+  - Mina, M., Iyer, A., Tavernari, D., Raynaud, F., & Ciriello, G. (2020). [Discovering functional evolutionary dependencies in human cancers](https://www.nature.com/articles/s41588-020-0703-5) Nature Genetics, 52(11), 1198-1207. 
 
+- If have queries feel free to raise an [Issuse](https://github.com/CSOgroup/select/issues) on the github.
 
 ### SessionInfo
 ```{r}
