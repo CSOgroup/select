@@ -26,7 +26,8 @@ devtools::install_github("CSOgroup/select")
 If you use this tool, please cite the papers
 
 - Mina, M., Iyer, A., Tavernari, D., Raynaud, F., & Ciriello, G. (2020). [Discovering functional evolutionary dependencies in human cancers](https://www.nature.com/articles/s41588-020-0703-5) Nature Genetics, 52(11), 1198-1207. 
-- Mina, M., Raynaud, F., Tavernari, D., Battistello, E., Sungalee, S., Saghafinia, S., ... & Ciriello, G. (2017). [Conditional selection of genomic alterations dictates cancer evolution and oncogenic dependencies.](https://www.cell.com/cancer-cell/fulltext/S1535-6108(17)30261-1) Cancer cell, 32(2), 155-168.
+
+- Mina, Marco and Raynaud, Franck and Tavernari, Daniele and Battistello, Elena and Sungalee, Stephanie and Saghafinia, Sadegh and Laessle, Titouan and Sanchez-Vega, Francisco and Schultz, Nikolaus and Oricchio, Elisa and Ciriello, G. (2017). [Conditional selection of genomic alterations dictates cancer evolution and oncogenic dependencies.](https://www.cell.com/cancer-cell/fulltext/S1535-6108(17)30261-1) Cancer cell, 32(2), 155-168.
 
 ### Contribution guidelines ###
 
